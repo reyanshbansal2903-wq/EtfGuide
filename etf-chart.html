@@ -1,0 +1,394 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>ETF Performance | ETF Guide</title>
+
+    <link rel="stylesheet" href="/style.css">
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+</head>
+
+
+<body>
+
+
+<nav class="navbar">
+
+    <div class="nav-container">
+
+        <a href="/" class="logo">
+            ETF<span>Guide</span>
+        </a>
+
+
+        <div class="nav-links">
+
+            <a href="/">Home</a>
+
+            <a href="/etfs">What Are ETFs?</a>
+
+            <a href="/compare">ETF vs Stocks</a>
+
+            <a href="/diversification">Spread Your Money</a>
+
+            <a href="/investing">How It Works</a>
+
+            <a href="/etf-chart">ETF Performance</a>
+
+        </div>
+
+
+        <div class="auth-buttons">
+
+            <a href="/login" class="login-button">
+                Log In
+            </a>
+
+            <a href="/register" class="signup-button">
+                Sign Up
+            </a>
+
+        </div>
+
+    </div>
+
+</nav>
+
+
+<section class="section">
+
+    <div class="section-heading">
+
+        <p class="eyebrow">
+            ETF PERFORMANCE
+        </p>
+
+        <h1>
+            How Have Some ETFs Performed?
+        </h1>
+
+        <p>
+            This chart shows the yearly return of some popular
+            ETFs. A positive number means the ETF went up that
+            year, while a negative number means it went down.
+        </p>
+
+    </div>
+
+
+    <div class="card">
+
+        <h2>
+            2025 vs 2022
+        </h2>
+
+        <p>
+            2025 was a positive year for these ETFs, while
+            2022 was a difficult year for the stock market.
+        </p>
+
+        <br>
+
+        <canvas id="etfChart"></canvas>
+
+    </div>
+
+
+    <br>
+    <br>
+
+
+    <div class="cards">
+
+
+        <div class="card">
+
+            <h3>VOO</h3>
+
+            <p>
+                VOO follows the S&P 500, which includes many
+                large U.S. companies.
+            </p>
+
+            <p>
+                <strong>2025:</strong> +17.82%
+            </p>
+
+            <p>
+                <strong>2022:</strong> -18.17%
+            </p>
+
+        </div>
+
+
+        <div class="card">
+
+            <h3>VTI</h3>
+
+            <p>
+                VTI covers a large part of the U.S. stock market,
+                including large, medium and smaller companies.
+            </p>
+
+            <p>
+                <strong>2025:</strong> +17.10%
+            </p>
+
+            <p>
+                <strong>2022:</strong> -19.52%
+            </p>
+
+        </div>
+
+
+        <div class="card">
+
+            <h3>QQQ</h3>
+
+            <p>
+                QQQ follows the Nasdaq-100 and has many
+                technology and other large companies.
+            </p>
+
+            <p>
+                <strong>2025:</strong> +20.77%
+            </p>
+
+            <p>
+                <strong>2022:</strong> -32.58%
+            </p>
+
+        </div>
+
+
+        <div class="card">
+
+            <h3>SPY</h3>
+
+            <p>
+                SPY also follows the S&P 500 and is one of
+                the most well-known ETFs.
+            </p>
+
+            <p>
+                <strong>2025:</strong> +17.72%
+            </p>
+
+            <p>
+                <strong>2022:</strong> -18.18%
+            </p>
+
+        </div>
+
+
+        <div class="card">
+
+            <h3>VT</h3>
+
+            <p>
+                VT contains companies from around the world
+                instead of only focusing on the United States.
+            </p>
+
+            <p>
+                <strong>2025:</strong> +22.44%
+            </p>
+
+            <p>
+                <strong>2022:</strong> -18.01%
+            </p>
+
+        </div>
+
+
+    </div>
+
+</section>
+
+
+<section class="dark-section">
+
+    <div class="two-column">
+
+        <div>
+
+            <p class="eyebrow">
+                WHAT THE CHART SHOWS
+            </p>
+
+            <h2>
+                ETFs can go up and down.
+            </h2>
+
+        </div>
+
+
+        <div>
+
+            <p>
+                Looking at the chart, you can see that even
+                popular ETFs can lose money.
+            </p>
+
+            <p>
+                For example, QQQ lost about 32.6% in 2022.
+                This shows that ETFs still have risk.
+            </p>
+
+            <p>
+                Just because an ETF contains lots of companies
+                does not mean that it will always make money.
+            </p>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<footer>
+
+    <div class="footer-container">
+
+        <div>
+
+            <div class="logo">
+                ETF<span>Guide</span>
+            </div>
+
+            <p>
+                A simple website explaining ETFs and investing.
+            </p>
+
+        </div>
+
+
+        <div class="footer-links">
+
+            <a href="/">Home</a>
+
+            <a href="/etfs">What Are ETFs?</a>
+
+            <a href="/compare">ETF vs Stocks</a>
+
+            <a href="/diversification">Spread Your Money</a>
+
+            <a href="/investing">How It Works</a>
+
+            <a href="/etf-chart">ETF Performance</a>
+
+        </div>
+
+    </div>
+
+
+    <div class="copyright">
+
+        This website is for educational purposes only.
+        It is not financial advice.
+
+    </div>
+
+</footer>
+
+
+<script>
+
+const ctx = document.getElementById("etfChart");
+
+new Chart(ctx, {
+
+    type: "bar",
+
+    data: {
+
+        labels: [
+            "VOO",
+            "VTI",
+            "QQQ",
+            "SPY",
+            "VT"
+        ],
+
+        datasets: [
+
+            {
+                label: "2025",
+                data: [
+                    17.82,
+                    17.10,
+                    20.77,
+                    17.72,
+                    22.44
+                ]
+            },
+
+            {
+                label: "2022",
+                data: [
+                    -18.17,
+                    -19.52,
+                    -32.58,
+                    -18.18,
+                    -18.01
+                ]
+            }
+
+        ]
+
+    },
+
+    options: {
+
+        responsive: true,
+
+        plugins: {
+
+            legend: {
+                display: true
+            }
+
+        },
+
+        scales: {
+
+            y: {
+
+                beginAtZero: true,
+
+                title: {
+                    display: true,
+                    text: "Return (%)"
+                },
+
+                ticks: {
+
+                    callback: function(value) {
+                        return value + "%";
+                    }
+
+                }
+
+            }
+
+        }
+
+    }
+
+});
+
+</script>
+
+
+</body>
+
+</html>
