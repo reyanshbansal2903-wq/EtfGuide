@@ -1,0 +1,469 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Create Account</title>
+
+    <style>
+
+        body {
+            font-family: Arial, sans-serif;
+            background: #f2f2f2;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+        }
+
+        .container {
+            background: white;
+            width: 350px;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.15);
+        }
+
+        h2 {
+            text-align: center;
+            margin-bottom: 25px;
+        }
+
+        label {
+            font-weight: bold;
+        }
+
+        input {
+            width: 100%;
+            box-sizing: border-box;
+            padding: 12px;
+            margin-top: 6px;
+            border: 1px solid #ccc;
+            border-radius: 6px;
+            font-size: 16px;
+        }
+
+        input:focus {
+            outline: none;
+            border-color: #4285f4;
+        }
+
+        .error {
+            color: red;
+            font-size: 14px;
+            margin-top: 5px;
+            min-height: 18px;
+        }
+
+        .buttons {
+            display: flex;
+            gap: 10px;
+            margin-top: 20px;
+        }
+
+        button {
+            flex: 1;
+            padding: 12px;
+            border: none;
+            border-radius: 6px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+
+        .signup {
+            background: #4285f4;
+            color: white;
+        }
+
+        .login {
+            background: #ddd;
+            color: black;
+        }
+
+        button:hover {
+            opacity: 0.85;
+        }
+
+        .requirements {
+            background: #f7f7f7;
+            padding: 12px;
+            margin-top: 15px;
+            border-radius: 6px;
+            font-size: 13px;
+        }
+
+        .requirements p {
+            margin: 4px 0;
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+<div class="container">
+
+    <h2>Create Account</h2>
+
+    <form action="/register" method="POST" id="registerForm">
+
+        <label>Username</label>
+
+        <input
+            type="text"
+            name="username"
+            id="username"
+            autocomplete="username"
+            required
+        >
+
+        <div class="error" id="usernameError"></div>
+
+
+        <br>
+
+
+        <label>Password</label>
+
+        <input
+            type="password"
+            name="password"
+            id="password"
+            autocomplete="new-password"
+            required
+        >
+
+        <div class="error" id="passwordError"></div>
+
+
+        <div class="requirements">
+
+            <strong>Password requirements:</strong>
+
+            <p>• At least 8 characters</p>
+            <p>• At least one capital letter</p>
+            <p>• At least one number</p>
+            <p>• At least one special character</p>
+            <p>• No spaces</p>
+            <p>• Cannot end with a special character</p>
+
+        </div>
+
+
+        <div class="buttons">
+
+            <button
+                type="submit"
+                class="signup"
+            >
+                Sign Up
+            </button>
+
+            <button
+                type="button"
+                class="login"
+                onclick="window.location.href='/login'"
+            >
+                Log In
+            </button>
+
+        </div>
+
+    </form>
+
+</div>
+
+
+<script>
+
+const form = document.getElementById("registerForm");
+
+const username = document.getElementById("username");
+const password = document.getElementById("password");
+
+const usernameError = document.getElementById("usernameError");
+const passwordError = document.getElementById("passwordError");
+
+
+// ==================================
+// USERNAME CHECK
+// ==================================
+
+username.addEventListener("input", async () => {
+
+    usernameError.textContent = "";
+
+    const value = username.value;
+
+
+    if (value.length === 0) {
+        return;
+    }
+
+
+    if (value.length < 8) {
+
+        usernameError.textContent =
+            "Username must be at least 8 characters.";
+
+        return;
+    }
+
+
+    if (/\s/.test(value)) {
+
+        usernameError.textContent =
+            "Username cannot contain spaces.";
+
+        return;
+    }
+
+
+    if (!/[a-zA-Z0-9]$/.test(value)) {
+
+        usernameError.textContent =
+            "Username cannot end with a special character.";
+
+        return;
+    }
+
+
+    try {
+
+        const response = await fetch(
+            "/check-username?username=" +
+            encodeURIComponent(value)
+        );
+
+        const data = await response.json();
+
+
+        if (data.exists) {
+
+            usernameError.textContent =
+                "This username already exists.";
+
+        }
+
+    } catch (error) {
+
+        console.log(error);
+
+    }
+
+});
+
+
+// ==================================
+// PASSWORD CHECK
+// ==================================
+
+password.addEventListener("input", async () => {
+
+    passwordError.textContent = "";
+
+    const value = password.value;
+
+
+    if (value.length === 0) {
+        return;
+    }
+
+
+    if (value.length < 8) {
+
+        passwordError.textContent =
+            "Password must be at least 8 characters.";
+
+        return;
+    }
+
+
+    if (/\s/.test(value)) {
+
+        passwordError.textContent =
+            "Password cannot contain spaces.";
+
+        return;
+    }
+
+
+    if (!/[A-Z]/.test(value)) {
+
+        passwordError.textContent =
+            "Password needs at least one capital letter.";
+
+        return;
+    }
+
+
+    if (!/[0-9]/.test(value)) {
+
+        passwordError.textContent =
+            "Password needs at least one number.";
+
+        return;
+    }
+
+
+    if (!/[^a-zA-Z0-9]/.test(value)) {
+
+        passwordError.textContent =
+            "Password needs at least one special character.";
+
+        return;
+    }
+
+
+    if (!/[a-zA-Z0-9]$/.test(value)) {
+
+        passwordError.textContent =
+            "Password cannot end with a special character.";
+
+        return;
+    }
+
+
+    // Check if password already exists
+    try {
+
+        const response = await fetch(
+            "/check-password?password=" +
+            encodeURIComponent(value)
+        );
+
+        const data = await response.json();
+
+
+        if (data.exists) {
+
+            passwordError.textContent =
+                "This password already exists.";
+
+        }
+
+    } catch (error) {
+
+        console.log(error);
+
+    }
+
+});
+
+
+// ==================================
+// FINAL FORM VALIDATION
+// ==================================
+
+form.addEventListener("submit", (event) => {
+
+    const usernameValue = username.value;
+    const passwordValue = password.value;
+
+
+    usernameError.textContent = "";
+    passwordError.textContent = "";
+
+
+    let valid = true;
+
+
+    // Username
+    if (usernameValue.length < 8) {
+
+        usernameError.textContent =
+            "Username must be at least 8 characters.";
+
+        valid = false;
+    }
+
+
+    if (/\s/.test(usernameValue)) {
+
+        usernameError.textContent =
+            "Username cannot contain spaces.";
+
+        valid = false;
+    }
+
+
+    if (!/[a-zA-Z0-9]$/.test(usernameValue)) {
+
+        usernameError.textContent =
+            "Username cannot end with a special character.";
+
+        valid = false;
+    }
+
+
+    // Password
+    if (passwordValue.length < 8) {
+
+        passwordError.textContent =
+            "Password must be at least 8 characters.";
+
+        valid = false;
+    }
+
+
+    if (/\s/.test(passwordValue)) {
+
+        passwordError.textContent =
+            "Password cannot contain spaces.";
+
+        valid = false;
+    }
+
+
+    if (!/[A-Z]/.test(passwordValue)) {
+
+        passwordError.textContent =
+            "Password needs at least one capital letter.";
+
+        valid = false;
+    }
+
+
+    if (!/[0-9]/.test(passwordValue)) {
+
+        passwordError.textContent =
+            "Password needs at least one number.";
+
+        valid = false;
+    }
+
+
+    if (!/[^a-zA-Z0-9]/.test(passwordValue)) {
+
+        passwordError.textContent =
+            "Password needs at least one special character.";
+
+        valid = false;
+    }
+
+
+    if (!/[a-zA-Z0-9]$/.test(passwordValue)) {
+
+        passwordError.textContent =
+            "Password cannot end with a special character.";
+
+        valid = false;
+    }
+
+
+    if (!valid) {
+        event.preventDefault();
+    }
+
+});
+
+</script>
+
+</body>
+</html>
