@@ -2,76 +2,46 @@
 <html lang="en">
 
 <head>
-
     <meta charset="UTF-8">
-
-    <meta name="viewport"
-          content="width=device-width, initial-scale=1.0">
-
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login | ETF Guide</title>
-
     <link rel="stylesheet" href="style.css">
-
 </head>
 
 <body>
 
 <nav class="navbar">
-
     <div class="nav-container">
-
-        <a href="/" class="logo">
+        <a href="index.html" class="logo">
             ETF<span>Guide</span>
         </a>
 
         <div class="nav-links">
-
             <a href="index.html">Home</a>
-
             <a href="etfs.html">What Are ETFs?</a>
-
             <a href="compare.html">ETF vs Stocks</a>
-
             <a href="diversification.html">Spread Your Money</a>
-
             <a href="investing.html">How It Works</a>
-
             <a href="etf-chart.html">ETF Performance</a>
-
         </div>
 
         <div class="auth-buttons">
-
-            <a href="/register" class="login-button">
+            <a href="signup.html" class="login-button">
                 Sign Up
             </a>
-
         </div>
-
     </div>
-
 </nav>
 
-
 <section class="section">
-
     <div class="section-heading">
-
         <h1>Login</h1>
-
-        <p>
-            Log in to see your investments.
-        </p>
-
+        <p>Log in to see your investments.</p>
     </div>
 
-
-    <form action="/login" method="POST">
-
-        <label for="username">
-            Username
-        </label>
-
+    <!-- Submits to index.html to simulate successful login on static host -->
+    <form action="index.html" method="GET">
+        <label for="username">Username</label>
         <input
             type="text"
             id="username"
@@ -79,11 +49,7 @@
             required
         >
 
-
-        <label for="password">
-            Password
-        </label>
-
+        <label for="password">Password</label>
         <input
             type="password"
             id="password"
@@ -91,19 +57,13 @@
             required
         >
 
-
         <button
             type="submit"
             class="primary-button">
-
             Log In
-
         </button>
-
     </form>
-
 </section>
 
 </body>
-
 </html>
