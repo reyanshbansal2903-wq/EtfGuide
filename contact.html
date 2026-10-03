@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Contact | ETF Guide</title>
+
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+<nav class="navbar">
+    <div class="nav-container">
+        <a href="index.html" class="logo">
+            ETF<span>Guide</span>
+        </a>
+
+        <div class="nav-links">
+            <a href="index.html">Home</a>
+            <a href="etfs.html">What Are ETFs?</a>
+            <a href="compare.html">ETF vs Stocks</a>
+            <a href="diversification.html">Spread Your Money</a>
+            <a href="investing.html">How It Works</a>
+            <a href="etf-chart.html">ETF Performance</a>
+            <a href="contact.html">Contact</a>
+        </div>
+
+        <div class="auth-buttons">
+            <a href="login.html" class="login-button">
+                Log In
+            </a>
+        </div>
+    </div>
+</nav>
+
+<section class="section">
+
+    <div class="section-heading">
+        <p class="eyebrow">GET IN TOUCH</p>
+        <h1>Contact Us</h1>
+        <p>Have a question or comment? Send it our way.</p>
+    </div>
+
+    <form id="contactForm">
+
+        <div class="form-group">
+            <label for="name">Your Name</label>
+            <br>
+            <input
+                type="text"
+                id="name"
+                name="name"
+                placeholder="Enter your name"
+                required
+            >
+        </div>
+
+        <br>
+
+        <div class="form-group">
+            <label for="email">Your Gmail</label>
+            <br>
+            <input
+                type="email"
+                id="email"
+                name="email"
+                placeholder="you@gmail.com"
+                required
+            >
+        </div>
+
+        <br>
+
+        <div class="form-group">
+            <label for="comment">Your Comment</label>
+            <br>
+            <textarea
+                id="comment"
+                name="comment"
+                rows="5"
+                placeholder="Type your message here"
+                required
+            ></textarea>
+        </div>
+
+        <br>
+
+        <div id="formStatus" class="error"></div>
+
+        <br>
+
+        <div class="center-button">
+            <button
+                type="submit"
+                class="primary-button"
+                id="submitBtn"
+            >
+                Submit
+            </button>
+        </div>
+
+    </form>
+
+</section>
+
+<footer>
+    <div class="footer-container">
+        <div>
+            <div class="logo">ETF<span>Guide</span></div>
+            <p>A simple website explaining ETFs and investing.</p>
+        </div>
+
+        <div class="footer-links">
+            <a href="index.html">Home</a>
+            <a href="etfs.html">What Are ETFs?</a>
+            <a href="compare.html">ETF vs Stocks</a>
+            <a href="diversification.html">Spread Your Money</a>
+            <a href="investing.html">How It Works</a>
+            <a href="etf-chart.html">ETF Performance</a>
+        </div>
+    </div>
+
+    <div class="copyright">
+        This website is for educational purposes only. It is not financial advice.
+    </div>
+</footer>
+
+<script>
+// ==================================================
+// REPLACE THIS with your own Apps Script Web App URL
+// ==================================================
+const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbwwWUkQnoAgi7UOT29faBzO6hPVcWCE_klciKj7sxcOIB96nvLl7aJMMNbm_-aUlY_fsA/exec;"
+
+const form = document.getElementById("contactForm");
+const status = document.getElementById("formStatus");
+const submitBtn = document.getElementById("submitBtn");
+
+form.addEventListener("submit", function (event) {
+    event.preventDefault();
+
+    const name = document.getElementById("name").value;
+    const email = document.getElementById("email").value;
+    const comment = document.getElementById("comment").value;
+
+    status.textContent = "";
+    submitBtn.disabled = true;
+    submitBtn.textContent = "Sending...";
+
+    fetch(SCRIPT_URL, {
+        method: "POST",
+        mode: "no-cors",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify({ name: name, email: email, comment: comment })
+    })
+    .then(function () {
+        status.style.color = "green";
+        status.textContent = "Thanks! Your message has been sent.";
+        form.reset();
+    })
+    .catch(function (error) {
+        status.style.color = "red";
+        status.textContent = "Something went wrong. Please try again.";
+        console.error(error);
+    })
+    .finally(function () {
+        submitBtn.disabled = false;
+        submitBtn.textContent = "Submit";
+    });
+});
+</script>
+
+</body>
+</html>
